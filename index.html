@@ -44,6 +44,13 @@
     <script>
         function getData() {
             const inputText = document.getElementById('inputText').value;
+            if((/https{0,1}:\/\/edpuzzle.com\/assignments\/[a-f0-9]{1,30}\/watch/).test(inputText)) {
+                var assignment_id = inputText.split("/")[4];
+                window.open("https://edpuzzle.com/api/v3/assignments/"+assignment_id, '_blank').focus();
+                document.getElementById('inputText').value = '';
+                return;
+            }
+            
             let assignment;
             try {
                 assignment = JSON.parse(inputText).medias[0];
